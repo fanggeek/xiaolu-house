@@ -1,0 +1,43 @@
+{
+  "name": "xiaolu-house",
+  "version": "1.0.2",
+  "description": "小鹿选房",
+  "type": "module",
+  "bin": {
+    "xiaolu-house": "dist/xiaolu-house"
+  },
+  "files": [
+    "dist/xiaolu-house",
+    "dist/xiaolu-house.cjs"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test tests/*.test.js",
+    "build": "node scripts/build.mjs",
+    "release": "bash scripts/release.sh",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "二手房",
+    "租房",
+    "新房",
+    "查成交",
+    "学区找房",
+    "龙虾选房",
+    "龙虾找房",
+    "小鹿选房",
+    "小鹿找房"
+  ],
+  "author": "FangGeek",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.4",
+    "terser": "^5.46.1"
+  }
+}
