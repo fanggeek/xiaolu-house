@@ -22,17 +22,22 @@ npx xiaolu-house
 
 ### 发布流程
 
-```bash
-# -> 自动完成：bump version + commit + tag + build + publish
-npm run release
+通过 GitHub Actions 自动发布，push tag 后自动触发构建和发布到 npm。
 
-# 推送到远程
-git push && git push --tags
+```bash
+npm run release           # patch 版本 (1.0.0 -> 1.0.1)
+npm run release -- minor  # minor 版本 (1.0.0 -> 1.1.0)
+npm run release -- major  # major 版本 (1.0.0 -> 2.0.0)
 ```
+
+执行流程：
+1. 检查 Git 工作区是否干净
+2. `npm version` 升级版本号并创建 commit + tag
+3. 推送 commit 和 tag 到 GitHub
+4. GitHub Actions 自动构建并发布到 npm
 
 **注意事项**：
 - 发布前 Git 工作区必须干净，否则会报错退出
-- `npm version` 在 lifecycle script 中运行时不会创建 commit/tag，因此使用独立脚本 `scripts/release.sh`
 
 ## 命令使用参考
 

@@ -10,10 +10,10 @@ if [ -n "$(git status --porcelain)" ]; then
 fi
 
 # Bump version (creates commit + tag)
-npm version patch
+# Usage: npm run release [patch|minor|major]
+VERSION_TYPE="${1:-patch}"
+npm version "$VERSION_TYPE"
 
-# Build
-npm run build
-
-# Publish
-npm publish
+# Push commit and tag to trigger GitHub Actions release
+git push
+git push --tags
