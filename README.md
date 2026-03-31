@@ -1,5 +1,8 @@
 # xiaolu-house
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm version](https://img.shields.io/npm/v/xiaolu-house.svg)](https://www.npmjs.com/package/xiaolu-house)
+
 小鹿选房命令行工具 — 让人类和 AI Agent 都能在终端中操作小鹿选房。
 
 ---
@@ -17,44 +20,25 @@
 ### 安装
 
 ```bash
-npx xiaolu-house
+npx -y xiaolu-house
 ```
 
-### 发布流程
-
-通过 GitHub Actions 自动发布，push tag 后自动触发构建和发布到 npm。
-
-```bash
-npm run release           # patch 版本 (1.0.0 -> 1.0.1)
-npm run release -- minor  # minor 版本 (1.0.0 -> 1.1.0)
-npm run release -- major  # major 版本 (1.0.0 -> 2.0.0)
-```
-
-执行流程：
-1. 检查 Git 工作区是否干净
-2. `npm version` 升级版本号并创建 commit + tag
-3. 推送 commit 和 tag 到 GitHub
-4. GitHub Actions 自动构建并发布到 npm
-
-**注意事项**：
-- 发布前 Git 工作区必须干净，否则会报错退出
-
-## 命令使用参考
+---
 
 ### 配置
 
 ```bash
 # 查看当前支持的城市列表
-npx xiaolu-house cities
+npx -y xiaolu-house cities
 
 # 设置 API Key（访问 https://www.xiaoluxuanfang.com/claw 根据页面内容操作）
-npx xiaolu-house config --set-api-key <your-api-key>
+npx -y xiaolu-house config --set-api-key <your-api-key>
 
 # 设置默认城市
-npx xiaolu-house config --set-city <your-city>
+npx -y xiaolu-house config --set-city <your-city>
 
 # 查看当前配置
-npx xiaolu-house config --show
+npx -y xiaolu-house config --show
 ```
 
 配置文件：`~/.xiaolu-house/config`
@@ -178,6 +162,27 @@ xiaolu-house new-communities
 | `--decoration` | `1`=精装 `2`=简装 `3`=毛坯                |
 | `--construction-areas` | 建筑面积区间，格式 `min,max`                 |
 | `-i, --new-community-ids` | newCommunityIds 列表，逗号分隔             |
+
+---
+
+### 发布流程
+
+通过 GitHub Actions 自动发布，push tag 后自动触发构建和发布到 npm。
+
+```bash
+npm run release           # patch 版本 (1.0.0 -> 1.0.1)
+npm run release -- minor  # minor 版本 (1.0.0 -> 1.1.0)
+npm run release -- major  # major 版本 (1.0.0 -> 2.0.0)
+```
+
+执行流程：
+1. 检查 Git 工作区是否干净
+2. `npm version` 升级版本号并创建 commit + tag
+3. 推送 commit 和 tag 到 GitHub
+4. GitHub Actions 自动构建并发布到 npm
+
+**注意事项**：
+- 发布前 Git 工作区必须干净，否则会报错退出
 
 ---
 
