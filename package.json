@@ -31,12 +31,12 @@
   "author": "FangGeek",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fanggeek/xiaolu-house.git"
+    "url": "git+https://github.com/fanggeek/xiaolu-house.git"
   },
   "bugs": {
     "url": "https://github.com/fanggeek/xiaolu-house/issues"
   },
-  "homepage": "https://github.com/fanggeek/xiaolu-house#readme",
+  "homepage": "https://www.xiaoluxuanfang.com/claw",
   "license": "MIT",
   "dependencies": {
     "commander": "^12.1.0"
