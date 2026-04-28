@@ -1,8 +1,8 @@
 ---
 name: xiaolu-house
-version: 1.0.0
+version: 1.1.0
 description: 小鹿选房是专业的房产信息平台，当用户需要找房源、选笋盘、比价格、查成交、看小区、查学区时使用。
-metadata: {"cliHelp":"npx -y xiaolu-house --help","requires":{"bins":["npx"]},"openclaw":{"skillKey":"xiaolu-house","emoji":"🏠","os":["linux","darwin","win32"]}}
+metadata: {"cliHelp":"npx -y xiaolu-house --help","openclaw":{"skillKey":"xiaolu-house","emoji":"🏠","os":["linux","darwin","win32"],"homepage":"https://github.com/fanggeek/xiaolu-house","requires":{"bins":["npx"]},"install":[{"kind":"node","package":"xiaolu-house","bins":["npx"]}]}}
 ---
 
 # 小鹿选房
@@ -21,9 +21,9 @@ metadata: {"cliHelp":"npx -y xiaolu-house --help","requires":{"bins":["npx"]},"o
 - **首次安装 SKILL 主动引导**：示例 ` 您想找什么样的房子？或者想了解哪些小区的成交情况？告诉我，我来帮您～ `
 - **用户需求意图引导**：如果用户提及找房意图不明确时（如：`帮我找房`，`我要买房` 等），可主动引导明确意图
 - **按需城市检查**：用户提出找房需求城市不在支持列表中，引导用户到「小鹿选房APP」查看
-- **按需 API Key 检查**：如果未设置 API Key，引导用户访问 https://www.xiaoluxuanfang.com/claw 根据页面内容操作
+- **按需 API Key 检查**：如果未设置 API Key，引导用户访问 https://www.xiaoluxuanfang.com/claw 根据页面内容操作（CLI 会将 API Key 加密存储在 `~/.xiaolu-house/config` ）
 - **禁止猜测参数**：如果参数不确定或提示参数不对时，先调用 `npx -y xiaolu-house --help` 查看帮助
-- **所有 `npx -y xiaolu-house` 命令由你执行，不要向用户展示终端命令**：执行后用自然语言回复用户
+- **所有 `npx -y xiaolu-house` 命令由你代为执行**：执行后用自然语言回复用户
 
 ---
 
@@ -34,12 +34,6 @@ metadata: {"cliHelp":"npx -y xiaolu-house --help","requires":{"bins":["npx"]},"o
 ```bash
 npx -y xiaolu-house <命令> [参数]
 ```
-
-> 如 npx -y 执行时网络超时或无法访问，建议先配置国内镜像：
-> ```bash
-> npm config set registry https://registry.npmmirror.com
-> ```
-> 配置后重新执行命令即可。
 
 - **识别用户意图**：默认用户买二手房
 - **执行查询**：先调用 `npx -y xiaolu-house --help` 查看帮助再按需选择
@@ -53,7 +47,7 @@ npx -y xiaolu-house <命令> [参数]
 # 查看当前支持的城市列表
 npx -y xiaolu-house cities
 
-# 查看当前配置
+# 查看当前配置及用户信息
 npx -y xiaolu-house config --show
 
 # 设置 API Key（可引导用户访问 https://www.xiaoluxuanfang.com/claw 根据页面内容操作）

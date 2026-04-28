@@ -5,32 +5,34 @@ import assert from 'node:assert'
 
 function cleanParams(obj) {
   return Object.fromEntries(
-    Object.entries(obj).filter(([, v]) => v !== undefined && v !== null && !(Array.isArray(v) && v.length === 0))
+    Object.entries(obj).filter(
+      ([, v]) =>
+        v !== undefined && v !== null && !(Array.isArray(v) && v.length === 0),
+    ),
   )
 }
 
 function parseList(val) {
-  return val.split(',').map(s => s.trim()).filter(Boolean)
+  return val
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 }
 
 function parseIntList(val) {
-  return val.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n))
+  return val
+    .split(',')
+    .map((s) => parseInt(s.trim(), 10))
+    .filter((n) => !isNaN(n))
 }
 
 function parseStringList(val) {
-  return val.split(',').map(s => s.trim()).filter(Boolean)
+  return val
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 }
 
-function parseConstructionAreas(val) {
-  const parts = val.split(',').map(s => s.trim())
-  if (parts.length !== 2) return undefined
-  const rawMin = parts[0] === '' ? undefined : Number(parts[0])
-  const rawMax = parts[1] === '' ? undefined : Number(parts[1])
-  const minValid = !Number.isNaN(rawMin)
-  const maxValid = !Number.isNaN(rawMax)
-  if (!minValid && !maxValid) return undefined
-  return { min: minValid ? rawMin : undefined, max: maxValid ? rawMax : undefined }
-}
 
 // ─── cleanParams ─────────────────────────────────────────────────────────────
 
@@ -38,14 +40,18 @@ describe('cleanParams', () => {
   it('移除 undefined / null / 空数组', () => {
     assert.deepStrictEqual(
       cleanParams({ a: 1, b: undefined, c: null, d: [] }),
-      { a: 1 }
+      { a: 1 },
     )
   })
 
   it('保留 falsy 但有效的值（0/false/空字符串均保留，cleanParams 只过滤 undefined/null/空数组）', () => {
     // cleanParams 的过滤规则：v !== undefined && v !== null && !(Array.isArray(v) && v.length === 0)
     // 所以 0 / false / '' 都会被保留
-    assert.deepStrictEqual(cleanParams({ a: 0, b: false, c: '' }), { a: 0, b: false, c: '' })
+    assert.deepStrictEqual(cleanParams({ a: 0, b: false, c: '' }), {
+      a: 0,
+      b: false,
+      c: '',
+    })
   })
 
   it('保留空数组以外的非空数组', () => {
@@ -74,8 +80,7 @@ describe('houses - API 参数映射', () => {
     assert.strictEqual(unitType, 'rent')
   })
 
-  it('areaIds 多值累积', () => {
-    // -a 可以多次使用，commander collect 函数累积
+  it('areaIds 多值数组保留', () => {
     const optsArea = ['440305', '440304']
     const areaIds = optsArea?.length ? optsArea : undefined
     assert.deepStrictEqual(areaIds, ['440305', '440304'])
@@ -87,33 +92,40 @@ describe('houses - API 参数映射', () => {
   })
 
   it('prices 区间构建（两值都有）', () => {
-    const minPrice = 200, maxPrice = 600
-    const prices = minPrice !== undefined || maxPrice !== undefined
-      ? [cleanParams({ min: minPrice, max: maxPrice })]
-      : undefined
+    const minPrice = 200,
+      maxPrice = 600
+    const prices =
+      minPrice !== undefined || maxPrice !== undefined
+        ? [cleanParams({ min: minPrice, max: maxPrice })]
+        : undefined
     assert.deepStrictEqual(prices, [{ min: 200, max: 600 }])
   })
 
   it('prices 区间构建（只有最小值）', () => {
-    const minPrice = 200, maxPrice = undefined
-    const prices = minPrice !== undefined || maxPrice !== undefined
-      ? [cleanParams({ min: minPrice, max: maxPrice })]
-      : undefined
+    const minPrice = 200,
+      maxPrice = undefined
+    const prices =
+      minPrice !== undefined || maxPrice !== undefined
+        ? [cleanParams({ min: minPrice, max: maxPrice })]
+        : undefined
     assert.deepStrictEqual(prices, [{ min: 200 }])
   })
 
   it('prices 区间构建（无值）', () => {
-    const prices = undefined !== undefined || undefined !== undefined
-      ? [cleanParams({ min: undefined, max: undefined })]
-      : undefined
+    const prices =
+      undefined !== undefined || undefined !== undefined
+        ? [cleanParams({ min: undefined, max: undefined })]
+        : undefined
     assert.strictEqual(prices, undefined)
   })
 
   it('constructionAreas 区间构建', () => {
-    const minArea = 70, maxArea = 120
-    const constructionAreas = minArea !== undefined || maxArea !== undefined
-      ? [cleanParams({ min: minArea, max: maxArea })]
-      : undefined
+    const minArea = 70,
+      maxArea = 120
+    const constructionAreas =
+      minArea !== undefined || maxArea !== undefined
+        ? [cleanParams({ min: minArea, max: maxArea })]
+        : undefined
     assert.deepStrictEqual(constructionAreas, [{ min: 70, max: 120 }])
   })
 
@@ -191,7 +203,13 @@ describe('communities - API 参数映射', () => {
   })
 
   it('空参数只含 city', () => {
-    const params = cleanParams({ city: '深圳', communityName: undefined, areaId: undefined, communityIds: undefined, nextId: undefined })
+    const params = cleanParams({
+      city: '深圳',
+      communityName: undefined,
+      areaId: undefined,
+      communityIds: undefined,
+      nextId: undefined,
+    })
     assert.deepStrictEqual(params, { city: '深圳' })
   })
 
@@ -227,7 +245,14 @@ describe('deals - API 参数映射', () => {
   })
 
   it('空参数只含 city', () => {
-    const params = cleanParams({ city: '深圳', areaId: undefined, subArea: undefined, communityIds: undefined, schoolIds: undefined, nextId: undefined })
+    const params = cleanParams({
+      city: '深圳',
+      areaId: undefined,
+      subArea: undefined,
+      communityIds: undefined,
+      schoolIds: undefined,
+      nextId: undefined,
+    })
     assert.deepStrictEqual(params, { city: '深圳' })
   })
 })
@@ -249,7 +274,7 @@ describe('schools - API 参数映射', () => {
       city: '深圳',
       keyword: '育才',
       type: 'pri',
-      nature: 1,        // Number
+      nature: 1, // Number
       tiers,
       areaIds,
       schoolIds: ids,
@@ -279,11 +304,10 @@ describe('schools - API 参数映射', () => {
     assert.strictEqual(typeof tiers[0], 'number')
   })
 
-  it('--keyword 无 -k, 短选项格式，与全局 -k 隔离', () => {
-    // schools 选项: --keyword（无 -k 短选项格式）
-    const def = '--keyword <keyword>'
-    assert.strictEqual(def.startsWith('-k,'), false)
-    assert.strictEqual(def.includes(' -k,'), false)
+  it('schools 仅暴露 --name 长参数', () => {
+    const def = '--name <name>'
+    assert.strictEqual(def.startsWith('-'), true)
+    assert.strictEqual(def.startsWith('-n,'), false)
   })
 })
 
@@ -296,19 +320,30 @@ describe('new-communities - API 参数映射', () => {
       keyword: '华润城',
       areaId: '440305',
     })
-    assert.deepStrictEqual(params, { city: '深圳', keyword: '华润城', areaId: '440305' })
+    assert.deepStrictEqual(params, {
+      city: '深圳',
+      keyword: '华润城',
+      areaId: '440305',
+    })
   })
 
   it('完整参数', () => {
     const rooms = parseList('2,3')
     const propertyTypes = parseList('1,2')
     const decoration = parseIntList('1,2,3')
-    const constructionAreas = parseConstructionAreas('80,120')
+    const minConstructionArea = 80,
+      maxConstructionArea = 120
+    const constructionAreas =
+      minConstructionArea !== undefined || maxConstructionArea !== undefined
+        ? cleanParams({ min: minConstructionArea, max: maxConstructionArea })
+        : undefined
 
-    const minPrice = 500, maxPrice = 1000
-    const priceRange = minPrice !== undefined || maxPrice !== undefined
-      ? cleanParams({ min: minPrice, max: maxPrice })
-      : undefined
+    const minPrice = 500,
+      maxPrice = 1000
+    const priceRange =
+      minPrice !== undefined || maxPrice !== undefined
+        ? cleanParams({ min: minPrice, max: maxPrice })
+        : undefined
 
     const params = cleanParams({
       city: '深圳',
@@ -342,17 +377,20 @@ describe('new-communities - API 参数映射', () => {
   })
 
   it('priceRange 只有最大值时保留 max', () => {
-    const minPrice = undefined, maxPrice = 1000
-    const priceRange = minPrice !== undefined || maxPrice !== undefined
-      ? cleanParams({ min: minPrice, max: maxPrice })
-      : undefined
+    const minPrice = undefined,
+      maxPrice = 1000
+    const priceRange =
+      minPrice !== undefined || maxPrice !== undefined
+        ? cleanParams({ min: minPrice, max: maxPrice })
+        : undefined
     assert.deepStrictEqual(priceRange, { max: 1000 })
   })
 
   it('priceRange 两值都无则不保留', () => {
-    const priceRange = undefined !== undefined || undefined !== undefined
-      ? cleanParams({ min: undefined, max: undefined })
-      : undefined
+    const priceRange =
+      undefined !== undefined || undefined !== undefined
+        ? cleanParams({ min: undefined, max: undefined })
+        : undefined
     assert.strictEqual(priceRange, undefined)
   })
 
@@ -362,64 +400,48 @@ describe('new-communities - API 参数映射', () => {
     assert.strictEqual(sort, 'smart')
   })
 
-  it('--keyword 无 -k, 短选项格式，与全局 -k 隔离', () => {
-    const def = '--keyword <keyword>'
-    assert.strictEqual(def.startsWith('-k,'), false)
-    assert.strictEqual(def.includes(' -k,'), false)
+  it('new-communities 仅暴露 --name 长参数', () => {
+    const def = '--name <name>'
+    assert.strictEqual(def.startsWith('-'), true)
+    assert.strictEqual(def.startsWith('-n,'), false)
   })
 
-  it('constructionAreas parseConstructionAreas 解析', () => {
-    assert.deepStrictEqual(parseConstructionAreas('80,120'), { min: 80, max: 120 })
-    assert.deepStrictEqual(parseConstructionAreas('80,'), { min: 80, max: undefined })
-    assert.deepStrictEqual(parseConstructionAreas(',120'), { min: undefined, max: 120 })
-    assert.strictEqual(parseConstructionAreas('abc'), undefined)
-  })
-})
+  it('constructionAreas min/max 参数构建', () => {
+    const minConstructionArea = 80,
+      maxConstructionArea = 120
+    const constructionAreas =
+      minConstructionArea !== undefined || maxConstructionArea !== undefined
+        ? cleanParams({ min: minConstructionArea, max: maxConstructionArea })
+        : undefined
+    assert.deepStrictEqual(constructionAreas, { min: 80, max: 120 })
 
-// ─── suggestions 参数映射 ─────────────────────────────────────────────────────
+    // 只传 min
+    const constructionAreasMinOnly = cleanParams({ min: 80, max: undefined })
+    assert.deepStrictEqual(constructionAreasMinOnly, { min: 80 })
 
-describe('suggest - API 参数映射', () => {
-  it('基本参数', () => {
-    const params = cleanParams({ city: '深圳', keyword: '南山', type: 'sell' })
-    assert.deepStrictEqual(params, { city: '深圳', keyword: '南山', type: 'sell' })
-  })
+    // 只传 max
+    const constructionAreasMaxOnly = cleanParams({ min: undefined, max: 120 })
+    assert.deepStrictEqual(constructionAreasMaxOnly, { max: 120 })
 
-  it('type 默认 sell', () => {
-    const opts = {}
-    const type = opts.type || 'sell'
-    assert.strictEqual(type, 'sell')
-  })
-
-  it('positional keyword 不经 opts', () => {
-    // suggest <keyword> 是 positional argument，commander 放在 action 第一个参数
-    const keyword = '育才二小'
-    const params = cleanParams({ city: '深圳', keyword, type: 'sell' })
-    assert.strictEqual(params.keyword, '育才二小')
+    // 都不传
+    const constructionAreasNone =
+      undefined !== undefined || undefined !== undefined
+        ? cleanParams({ min: undefined, max: undefined })
+        : undefined
+    assert.strictEqual(constructionAreasNone, undefined)
   })
 })
 
-// ─── 全局 -k 与子命令选项隔离 ────────────────────────────────────────────────
+// ─── CLI 参数定义约束 ─────────────────────────────────────────────────────────
 
-describe('全局 -k 与子命令 --keyword 隔离验证', () => {
-  // 短选项格式是 "-k," （-k 后面跟逗号），检查是否存在这种格式
-  const hasShortK = (def) => def.startsWith('-k,') || def.includes(' -k,')
-
-  it('schools --keyword 不以 -k, 开头（无 -k 短选项）', () => {
-    // index.js: .option('--keyword <keyword>', '学校名称关键字')
-    const def = '--keyword <keyword>'
-    assert.strictEqual(def.startsWith('-k,'), false)
-    assert.strictEqual(def.includes(' -k,'), false)
+describe('CLI 参数定义约束', () => {
+  it('schools name 不包含短参数', () => {
+    const def = '--name <name>'
+    assert.strictEqual(def.startsWith('-n,'), false)
   })
 
-  it('new-communities --keyword 不以 -k, 开头（无 -k 短选项）', () => {
-    // index.js: .option('--keyword <keyword>', '新房名称关键字')
-    const def = '--keyword <keyword>'
-    assert.strictEqual(def.startsWith('-k,'), false)
-    assert.strictEqual(def.includes(' -k,'), false)
-  })
-
-  it('全局 -k, --key 选项存在', () => {
-    const def = '-k, --key <apiKey>'
-    assert.strictEqual(def.startsWith('-k,'), true)
+  it('new-communities property-types 不包含短参数', () => {
+    const def = '--property-types <types>'
+    assert.strictEqual(def.startsWith('-p,'), false)
   })
 })
