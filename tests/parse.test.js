@@ -8,26 +8,38 @@ function collect(val, prev) {
 }
 
 function parseList(val) {
-  return val.split(',').map(s => s.trim()).filter(Boolean)
+  return val
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 }
 
 function parseIntList(val) {
-  return val.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n))
+  return val
+    .split(',')
+    .map((s) => parseInt(s.trim(), 10))
+    .filter((n) => !isNaN(n))
 }
 
 function parseStringList(val) {
-  return val.split(',').map(s => s.trim()).filter(Boolean)
+  return val
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 }
 
 function parseConstructionAreas(val) {
-  const parts = val.split(',').map(s => s.trim())
+  const parts = val.split(',').map((s) => s.trim())
   if (parts.length !== 2) return undefined
   const rawMin = parts[0] === '' ? undefined : Number(parts[0])
   const rawMax = parts[1] === '' ? undefined : Number(parts[1])
   const minValid = !Number.isNaN(rawMin)
   const maxValid = !Number.isNaN(rawMax)
   if (!minValid && !maxValid) return undefined
-  return { min: minValid ? rawMin : undefined, max: maxValid ? rawMax : undefined }
+  return {
+    min: minValid ? rawMin : undefined,
+    max: maxValid ? rawMax : undefined,
+  }
 }
 
 // ─── parseList ─────────────────────────────────────────────────────────────────
@@ -38,11 +50,19 @@ describe('parseList - 逗号分隔字符串转数组', () => {
   })
 
   it('多值去空格', () => {
-    assert.deepStrictEqual(parseList('南山,福田,罗湖'), ['南山', '福田', '罗湖'])
+    assert.deepStrictEqual(parseList('南山,福田,罗湖'), [
+      '南山',
+      '福田',
+      '罗湖',
+    ])
   })
 
   it('多值带空格', () => {
-    assert.deepStrictEqual(parseList('南山 , 福田 , 罗湖'), ['南山', '福田', '罗湖'])
+    assert.deepStrictEqual(parseList('南山 , 福田 , 罗湖'), [
+      '南山',
+      '福田',
+      '罗湖',
+    ])
   })
 
   it('空字符串返回空数组', () => {
@@ -98,19 +118,31 @@ describe('parseStringList - 逗号分隔字符串数组', () => {
 
 describe('parseConstructionAreas - 面积区间解析', () => {
   it('完整区间', () => {
-    assert.deepStrictEqual(parseConstructionAreas('70,120'), { min: 70, max: 120 })
+    assert.deepStrictEqual(parseConstructionAreas('70,120'), {
+      min: 70,
+      max: 120,
+    })
   })
 
   it('只有最小值', () => {
-    assert.deepStrictEqual(parseConstructionAreas('70,'), { min: 70, max: undefined })
+    assert.deepStrictEqual(parseConstructionAreas('70,'), {
+      min: 70,
+      max: undefined,
+    })
   })
 
   it('只有最大值', () => {
-    assert.deepStrictEqual(parseConstructionAreas(',120'), { min: undefined, max: 120 })
+    assert.deepStrictEqual(parseConstructionAreas(',120'), {
+      min: undefined,
+      max: 120,
+    })
   })
 
   it('带空格', () => {
-    assert.deepStrictEqual(parseConstructionAreas(' 70 , 120 '), { min: 70, max: 120 })
+    assert.deepStrictEqual(parseConstructionAreas(' 70 , 120 '), {
+      min: 70,
+      max: 120,
+    })
   })
 
   it('非数字返回 undefined', () => {

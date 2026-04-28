@@ -19,7 +19,11 @@ describe('cleanParams', () => {
   })
 
   it('保留 falsy 但有效的值（如 0）', () => {
-    const result = cleanParams({ priceMin: 0, priceMax: 500, keyword: undefined })
+    const result = cleanParams({
+      priceMin: 0,
+      priceMax: 500,
+      keyword: undefined,
+    })
     assert.deepStrictEqual(result, { priceMin: 0, priceMax: 500 })
   })
 

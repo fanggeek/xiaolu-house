@@ -1,9 +1,13 @@
-import { getApiKey, getCity, apiPost, printResult, handleError, cleanParams } from '../utils.js'
+import {
+  getCity,
+  apiPost,
+  printResult,
+  handleError,
+  cleanParams,
+} from '../utils.js'
 
 export async function cmdNewCommunities(opts) {
-  const apiKey = getApiKey()
   const city = getCity()
-  console.log('正在查询新房...')
 
   try {
     let priceRange
@@ -11,22 +15,26 @@ export async function cmdNewCommunities(opts) {
       priceRange = cleanParams({ min: opts.minPrice, max: opts.maxPrice })
     }
 
+    let constructionAreas
+    if (opts.minConstructionArea !== undefined || opts.maxConstructionArea !== undefined) {
+      constructionAreas = cleanParams({ min: opts.minConstructionArea, max: opts.maxConstructionArea })
+    }
+
     const params = cleanParams({
       city,
-      keyword: opts.newCommunityName,
-      areaId: opts.areaIds,
+      name: opts.name,
+      reason: opts.reason,
       rooms: opts.rooms,
       propertyTypes: opts.propertyTypes,
-      sellStatus: opts.status,
+      sellStatus: opts.sellStatus,
       priceType: opts.priceType || 'totalPrice',
       priceRange,
       decorationStandards: opts.decoration,
-      sort: opts.sort || 'smart',
-      constructionAreas: opts.constructionAreas,
-      teamNewCommunityIds: opts.newCommunityIds,
+      constructionAreas,
+      areaId: opts.areaId,
     })
 
-    const result = await apiPost('/mcp-api/search-new-communities', params, apiKey)
+    const result = await apiPost('/mcp-api/search-new-communities', params)
     printResult(result)
   } catch (err) {
     handleError(err)
