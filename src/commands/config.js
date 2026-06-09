@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { apiGetOptionalKey, clearCache, clearConfig, getConfig, handleError, printResult, saveConfig } from '../utils.js'
+import { apiGet, clearCache, clearConfig, getConfig, handleError, printResult, saveConfig, validateCity } from '../utils.js'
 
 // 清除所有配置
 export function cmdConfigClear() {
@@ -15,7 +15,7 @@ export function cmdConfigClear() {
 export async function cmdConfigShow() {
   const cfg = getConfig()
   try {
-    const result = await apiGetOptionalKey(
+    const result = await apiGet(
       `/mcp-api/profile?city=${encodeURIComponent(cfg.city || '')}`,
     )
     printResult(result)
@@ -37,11 +37,16 @@ export function cmdConfigSetKey(key) {
 }
 
 // 设置城市
-export function cmdConfigSetCity(city) {
-  const cfg = getConfig()
-  cfg.city = city
-  saveConfig(cfg)
-  console.log()
-  console.log(`[OK] 城市已保存: ${city}`)
-  console.log()
+export async function cmdConfigSetCity(city) {
+  try {
+    const validCity = await validateCity(city)
+    const cfg = getConfig()
+    cfg.city = validCity
+    saveConfig(cfg)
+    console.log()
+    console.log(`[OK] 城市已保存: ${validCity}`)
+    console.log()
+  } catch (err) {
+    handleError(err)
+  }
 }

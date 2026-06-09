@@ -7,9 +7,8 @@ import {
 } from '../utils.js'
 
 export async function cmdDeals(opts) {
-  const city = getCity()
-
   try {
+    const city = getCity()
     const params = cleanParams({
       city,
       name: opts.name,

@@ -34,7 +34,7 @@ program
     if (opts.setApiKey) {
       cmdConfigSetKey(opts.setApiKey)
     } else if (opts.setCity) {
-      cmdConfigSetCity(opts.setCity)
+      await cmdConfigSetCity(opts.setCity)
     } else if (opts.clear) {
       cmdConfigClear()
     } else {

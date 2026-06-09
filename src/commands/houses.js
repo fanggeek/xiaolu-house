@@ -7,9 +7,8 @@ import {
 } from '../utils.js'
 
 export async function cmdHouses(opts) {
-  const city = getCity()
-
   try {
+    const city = getCity()
     let prices
     const type = opts.type || 'sell'
     if (type === 'sell') {

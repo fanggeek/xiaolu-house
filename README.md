@@ -7,22 +7,6 @@
 
 ---
 
-## SKILLS
-
-| Skill          | Description                                              |
-| -------------- | -------------------------------------------------------- |
-| `xiaolu-house` | 当用户要查二手房、最新成交、小区、学校、新房、租房时使用 |
-
-### SKILL 仓库
-- [SkillHub](https://skillhub.cn/skills/xiaolu-house)
-- [Skills.sh](https://skills.sh/fanggeek/xiaolu-house/xiaolu-house)
-- [ClawHub](https://clawhub.ai/fangjike/xiaolu-house)
-- [FindSkill](https://findskill.com/clawhub/fangjike/xiaolu-house)
-- [ModelScope](https://modelscope.cn/skills)
-- [Skillsmp](https://skillsmp.com/zh)
-
----
-
 ## CLI
 
 ### 安装
@@ -163,9 +147,62 @@ xiaolu-house new-communities
 
 ---
 
+### SKILL 仓库
+
+#### 已上架
+
+- [ClawHub](https://clawhub.ai/fangjike/xiaolu-house)
+- [SkillHub](https://skillhub.cn/skills/xiaolu-house)
+- [Skills.sh](https://skills.sh/fanggeek/xiaolu-house/xiaolu-house)
+- [ModelScope](https://modelscope.cn/skills/FangGeek/xiaolu-house)
+- [LobeHub](https://lobehub.com/skills/fanggeek-xiaolu-house-xiaolu-house)
+- [FindSkill](https://findskill.com/clawhub/fangjike/xiaolu-house)
+
+#### 待上架
+
+- [CowAgent](https://skills.cowagent.ai/)
+- [Skillsmp](https://skillsmp.com/zh)
+- [SkillDrop](https://skilldrop.ai/)
+- [Clawbo](https://clawbot.ai/skills/)
+- [ClawSkills](https://clawskills.co/)
+- [SkillsLLM](https://skillsllm.com/)
+- [Skillta](https://skillta.com/)
+- [Skillmint](https://www.skillmint.org/)
+- [Skiln](https://skiln.co/)
+
+---
+
+### 开发命令
+
+| 命令 | 作用 |
+| ---- | ---- |
+| `npm start` | 运行源码入口 `src/index.js`，用于本地调试 CLI。 |
+| `npm test` | 执行 `tests/*.test.js` 下的 Node.js 测试。 |
+| `npm run build` | 执行构建脚本，生成发布用的 `dist/xiaolu-house` 和 `dist/xiaolu-house.cjs`。 |
+| `npm run skill` | 根据 `scripts/generate-skill/city-meta.json` 和模板重新生成主 SKILL 与城市 SKILL。 |
+| `npm run release` | 执行发布脚本，升级版本并推送 commit/tag。 |
+| `npm run prepublishOnly` | npm 发布前自动执行构建，通常不需要手动调用。 |
+
+---
+
 ### 发布流程
 
-通过 GitHub Actions 自动发布，push tag 后自动触发构建和发布到 npm。
+通过 GitHub Actions 自动发布。发布脚本会创建版本 commit 和 tag，push tag 后触发构建并发布到 npm。
+
+#### 发布前检查
+
+```bash
+# 如果改过 SKILL 模板或城市元数据，先重新生成 SKILL 并提交生成结果
+npm run skill
+
+# 发布前验证
+npm test
+npm run build
+```
+
+发布前 Git 工作区必须干净，否则 `npm run release` 会报错退出。若 `npm run skill` 生成了 `skills/` 变更，需要先提交后再发布。
+
+#### 执行发布
 
 ```bash
 npm run release           # patch 版本 (1.0.0 -> 1.0.1)
@@ -173,16 +210,12 @@ npm run release -- minor  # minor 版本 (1.0.0 -> 1.1.0)
 npm run release -- major  # major 版本 (1.0.0 -> 2.0.0)
 ```
 
-执行流程：
+发布脚本执行流程：
 
 1. 检查 Git 工作区是否干净
 2. `npm version` 升级版本号并创建 commit + tag
 3. 推送 commit 和 tag 到 GitHub
-4. GitHub Actions 自动构建并发布到 npm
-
-**注意事项**：
-
-- 发布前 Git 工作区必须干净，否则会报错退出
+4. GitHub Actions 执行 `npm ci`、`npm run build`、`npm publish --provenance --access public`
 
 ---
 
