@@ -6,9 +6,8 @@ import { getCity, apiGetWithCache, printResult, handleError } from '../utils.js'
  * 获取当前城市区域 areaId 映射表（Markdown）
  */
 export async function cmdAreas() {
-  const city = getCity()
-
   try {
+    const city = getCity()
     const result = await apiGetWithCache(
       `/mcp-api/areas?city=${encodeURIComponent(city)}`,
       `${city}:areas`,

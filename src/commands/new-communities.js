@@ -7,9 +7,8 @@ import {
 } from '../utils.js'
 
 export async function cmdNewCommunities(opts) {
-  const city = getCity()
-
   try {
+    const city = getCity()
     let priceRange
     if (opts.minPrice !== undefined || opts.maxPrice !== undefined) {
       priceRange = cleanParams({ min: opts.minPrice, max: opts.maxPrice })

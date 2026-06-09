@@ -1,0 +1,451 @@
+[
+  {
+    "city": "安阳",
+    "province": "河南",
+    "cityPinyin": [
+      "anyang"
+    ],
+    "provincePinyin": "henan"
+  },
+  {
+    "city": "保定",
+    "province": "河北",
+    "cityPinyin": [
+      "baoding"
+    ],
+    "provincePinyin": "hebei"
+  },
+  {
+    "city": "常州",
+    "province": "江苏",
+    "cityPinyin": [
+      "changzhou"
+    ],
+    "provincePinyin": "jiangsu"
+  },
+  {
+    "city": "成都",
+    "province": "四川",
+    "cityPinyin": [
+      "chengdu"
+    ],
+    "provincePinyin": "sichuan"
+  },
+  {
+    "city": "恩施",
+    "province": "湖北",
+    "cityPinyin": [
+      "enshi"
+    ],
+    "provincePinyin": "hubei"
+  },
+  {
+    "city": "佛山",
+    "province": "广东",
+    "cityPinyin": [
+      "foshan"
+    ],
+    "provincePinyin": "guangdong"
+  },
+  {
+    "city": "福州",
+    "province": "福建",
+    "cityPinyin": [
+      "fuzhou"
+    ],
+    "provincePinyin": "fujian"
+  },
+  {
+    "city": "广州",
+    "province": "广东",
+    "cityPinyin": [
+      "guangzhou"
+    ],
+    "provincePinyin": "guangdong"
+  },
+  {
+    "city": "桂林",
+    "province": "广西",
+    "cityPinyin": [
+      "guilin"
+    ],
+    "provincePinyin": "guangxi"
+  },
+  {
+    "city": "邯郸",
+    "province": "河北",
+    "cityPinyin": [
+      "handan"
+    ],
+    "provincePinyin": "hebei"
+  },
+  {
+    "city": "衡水",
+    "province": "河北",
+    "cityPinyin": [
+      "hengshui"
+    ],
+    "provincePinyin": "hebei"
+  },
+  {
+    "city": "衡阳",
+    "province": "湖南",
+    "cityPinyin": [
+      "hengyang"
+    ],
+    "provincePinyin": "hunan"
+  },
+  {
+    "city": "菏泽",
+    "province": "山东",
+    "cityPinyin": [
+      "heze"
+    ],
+    "provincePinyin": "shandong"
+  },
+  {
+    "city": "吉安",
+    "province": "江西",
+    "cityPinyin": [
+      "jian"
+    ],
+    "provincePinyin": "jiangxi"
+  },
+  {
+    "city": "金昌",
+    "province": "甘肃",
+    "cityPinyin": [
+      "jinchang"
+    ],
+    "provincePinyin": "gansu"
+  },
+  {
+    "city": "荆州",
+    "province": "湖北",
+    "cityPinyin": [
+      "jingzhou"
+    ],
+    "provincePinyin": "hubei"
+  },
+  {
+    "city": "金华",
+    "province": "浙江",
+    "cityPinyin": [
+      "jinhua"
+    ],
+    "provincePinyin": "zhejiang"
+  },
+  {
+    "city": "晋中",
+    "province": "山西",
+    "cityPinyin": [
+      "jinzhong"
+    ],
+    "provincePinyin": "shanxi"
+  },
+  {
+    "city": "开封",
+    "province": "河南",
+    "cityPinyin": [
+      "kaifeng"
+    ],
+    "provincePinyin": "henan"
+  },
+  {
+    "city": "昆明",
+    "province": "云南",
+    "cityPinyin": [
+      "kunming"
+    ],
+    "provincePinyin": "yunnan"
+  },
+  {
+    "city": "连云港",
+    "province": "江苏",
+    "cityPinyin": [
+      "lianyungang"
+    ],
+    "provincePinyin": "jiangsu"
+  },
+  {
+    "city": "聊城",
+    "province": "山东",
+    "cityPinyin": [
+      "liaocheng"
+    ],
+    "provincePinyin": "shandong"
+  },
+  {
+    "city": "辽源",
+    "province": "吉林",
+    "cityPinyin": [
+      "liaoyuan"
+    ],
+    "provincePinyin": "jilin"
+  },
+  {
+    "city": "临沂",
+    "province": "山东",
+    "cityPinyin": [
+      "linyi"
+    ],
+    "provincePinyin": "shandong"
+  },
+  {
+    "city": "六安",
+    "province": "安徽",
+    "cityPinyin": [
+      "luan",
+      "liuan"
+    ],
+    "provincePinyin": "anhui"
+  },
+  {
+    "city": "南充",
+    "province": "四川",
+    "cityPinyin": [
+      "nanchong"
+    ],
+    "provincePinyin": "sichuan"
+  },
+  {
+    "city": "南京",
+    "province": "江苏",
+    "cityPinyin": [
+      "nanjing"
+    ],
+    "provincePinyin": "jiangsu"
+  },
+  {
+    "city": "南通",
+    "province": "江苏",
+    "cityPinyin": [
+      "nantong"
+    ],
+    "provincePinyin": "jiangsu"
+  },
+  {
+    "city": "南阳",
+    "province": "河南",
+    "cityPinyin": [
+      "nanyang"
+    ],
+    "provincePinyin": "henan"
+  },
+  {
+    "city": "宁波",
+    "province": "浙江",
+    "cityPinyin": [
+      "ningbo"
+    ],
+    "provincePinyin": "zhejiang"
+  },
+  {
+    "city": "宁德",
+    "province": "福建",
+    "cityPinyin": [
+      "ningde"
+    ],
+    "provincePinyin": "fujian"
+  },
+  {
+    "city": "莆田",
+    "province": "福建",
+    "cityPinyin": [
+      "putian"
+    ],
+    "provincePinyin": "fujian"
+  },
+  {
+    "city": "潜江",
+    "province": "湖北",
+    "cityPinyin": [
+      "qianjiang"
+    ],
+    "provincePinyin": "hubei"
+  },
+  {
+    "city": "泉州",
+    "province": "福建",
+    "cityPinyin": [
+      "quanzhou"
+    ],
+    "provincePinyin": "fujian"
+  },
+  {
+    "city": "三门峡",
+    "province": "河南",
+    "cityPinyin": [
+      "sanmenxia"
+    ],
+    "provincePinyin": "henan"
+  },
+  {
+    "city": "上海",
+    "province": "上海",
+    "cityPinyin": [
+      "shanghai"
+    ],
+    "provincePinyin": "shanghai"
+  },
+  {
+    "city": "绍兴",
+    "province": "浙江",
+    "cityPinyin": [
+      "shaoxing"
+    ],
+    "provincePinyin": "zhejiang"
+  },
+  {
+    "city": "深圳",
+    "province": "广东",
+    "cityPinyin": [
+      "shenzhen"
+    ],
+    "provincePinyin": "guangdong"
+  },
+  {
+    "city": "四平",
+    "province": "吉林",
+    "cityPinyin": [
+      "siping"
+    ],
+    "provincePinyin": "jilin"
+  },
+  {
+    "city": "宿迁",
+    "province": "江苏",
+    "cityPinyin": [
+      "suqian"
+    ],
+    "provincePinyin": "jiangsu"
+  },
+  {
+    "city": "天津",
+    "province": "天津",
+    "cityPinyin": [
+      "tianjin"
+    ],
+    "provincePinyin": "tianjin"
+  },
+  {
+    "city": "通辽",
+    "province": "内蒙古",
+    "cityPinyin": [
+      "tongliao"
+    ],
+    "provincePinyin": "neimenggu"
+  },
+  {
+    "city": "温州",
+    "province": "浙江",
+    "cityPinyin": [
+      "wenzhou"
+    ],
+    "provincePinyin": "zhejiang"
+  },
+  {
+    "city": "厦门",
+    "province": "福建",
+    "cityPinyin": [
+      "xiamen"
+    ],
+    "provincePinyin": "fujian"
+  },
+  {
+    "city": "湘西",
+    "province": "湖南",
+    "cityPinyin": [
+      "xiangxi"
+    ],
+    "provincePinyin": "hunan"
+  },
+  {
+    "city": "仙桃",
+    "province": "湖北",
+    "cityPinyin": [
+      "xiantao"
+    ],
+    "provincePinyin": "hubei"
+  },
+  {
+    "city": "西宁",
+    "province": "青海",
+    "cityPinyin": [
+      "xining"
+    ],
+    "provincePinyin": "qinghai"
+  },
+  {
+    "city": "许昌",
+    "province": "河南",
+    "cityPinyin": [
+      "xuchang"
+    ],
+    "provincePinyin": "henan"
+  },
+  {
+    "city": "徐州",
+    "province": "江苏",
+    "cityPinyin": [
+      "xuzhou"
+    ],
+    "provincePinyin": "jiangsu"
+  },
+  {
+    "city": "伊犁",
+    "province": "新疆",
+    "cityPinyin": [
+      "yili"
+    ],
+    "provincePinyin": "xinjiang"
+  },
+  {
+    "city": "岳阳",
+    "province": "湖南",
+    "cityPinyin": [
+      "yueyang"
+    ],
+    "provincePinyin": "hunan"
+  },
+  {
+    "city": "运城",
+    "province": "山西",
+    "cityPinyin": [
+      "yuncheng"
+    ],
+    "provincePinyin": "shanxi"
+  },
+  {
+    "city": "湛江",
+    "province": "广东",
+    "cityPinyin": [
+      "zhanjiang"
+    ],
+    "provincePinyin": "guangdong"
+  },
+  {
+    "city": "中山",
+    "province": "广东",
+    "cityPinyin": [
+      "zhongshan"
+    ],
+    "provincePinyin": "guangdong"
+  },
+  {
+    "city": "舟山",
+    "province": "浙江",
+    "cityPinyin": [
+      "zhoushan"
+    ],
+    "provincePinyin": "zhejiang"
+  },
+  {
+    "city": "珠海",
+    "province": "广东",
+    "cityPinyin": [
+      "zhuhai"
+    ],
+    "provincePinyin": "guangdong"
+  }
+]

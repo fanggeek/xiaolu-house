@@ -148,6 +148,11 @@ export function getApiKey() {
   )
 }
 
+function getApiKeyHeaders() {
+  const key = getLocalConfig().apiKey
+  return key ? { 'X-Fg-Api-Key': key } : {}
+}
+
 /**
  * 获取城市配置（必填）
  */
@@ -170,8 +175,8 @@ export async function apiPost(path, data) {
     headers: {
       Accept: 'text/markdown',
       'Content-Type': 'application/json',
-      'X-Fg-Api-Key': getApiKey(),
       'User-Agent': `${pkg.name}/${pkg.version}`,
+      ...getApiKeyHeaders(),
     },
     body: JSON.stringify(data),
   })
@@ -187,31 +192,16 @@ export async function apiGet(path) {
     headers: {
       Accept: 'text/markdown',
       'Content-Type': 'application/json',
-      'X-Fg-Api-Key': getApiKey(),
       'User-Agent': `${pkg.name}/${pkg.version}`,
+      ...getApiKeyHeaders(),
     },
   })
 }
 
-/**
- * 发起 GET 请求（允许 API Key 为空）
- * @param {string} path - API 路径
- */
-export async function apiGetOptionalKey(path) {
-  return requestText(path, {
-    method: 'GET',
-    headers: {
-      Accept: 'text/markdown',
-      'Content-Type': 'application/json',
-      'X-Fg-Api-Key': getLocalConfig().apiKey || '',
-      'User-Agent': `${pkg.name}/${pkg.version}`,
-    },
-  })
-}
-
-export async function apiGetWithCache(path, cacheKey, ttlMs = CACHE_MS) {
+function getCachedValue(cacheKey) {
   const store = getCacheStore()
   const cached = store[cacheKey]
+
   if (
     cached &&
     typeof cached.value === 'string' &&
@@ -221,13 +211,50 @@ export async function apiGetWithCache(path, cacheKey, ttlMs = CACHE_MS) {
     return cached.value
   }
 
-  const value = await apiGet(path)
+  return null
+}
+
+function setCachedValue(cacheKey, value, ttlMs) {
+  const store = getCacheStore()
+
   store[cacheKey] = {
     value,
     expiresAt: Date.now() + ttlMs,
   }
   saveCacheStore(store)
+}
+
+export async function apiGetWithCache(path, cacheKey, options = {}) {
+  const ttlMs = options.ttlMs || CACHE_MS
+  const cached = getCachedValue(cacheKey)
+  if (cached) return cached
+
+  const value = await apiGet(path)
+  setCachedValue(cacheKey, value, ttlMs)
   return value
+}
+
+export async function validateCity(city) {
+  const normalizedCity = String(city || '').trim()
+
+  if (!normalizedCity) {
+    throw new Error(
+      '城市未配置\n请先配置: `xiaolu-house config --set-city <your-city>`\n可用城市: `xiaolu-house cities`',
+    )
+  }
+
+  const result = await apiGetWithCache('/mcp-api/cities', 'cities')
+  const cityMatched = String(result || '')
+    .split('\n')
+    .some((line) => /^-\s+(.+?)\s*$/.exec(line)?.[1] === normalizedCity)
+
+  if (!cityMatched) {
+    throw new Error(
+      `不支持的城市名称: ${normalizedCity}\n可用城市请查看: \`xiaolu-house cities\``,
+    )
+  }
+
+  return normalizedCity
 }
 
 /**
