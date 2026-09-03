@@ -19,6 +19,8 @@ mkdirSync(SKILLS_DIR, { recursive: true })
 
 writeSkill('xiaolu-house', {
   skillName: 'xiaolu-house',
+  displayName: '小鹿选房',
+  displayNameEn: 'Xiaolu House',
   cityPhrase: '',
   supportedCitiesSection: renderSupportedCitiesSection(cities),
   defaultCity: '<your-city>',
@@ -27,6 +29,8 @@ writeSkill('xiaolu-house', {
 for (const citySkill of citySkills) {
   writeSkill(citySkill.skillName, {
     skillName: citySkill.skillName,
+    displayName: `${citySkill.city.city}小鹿选房`,
+    displayNameEn: `${formatEnglishName(citySkill.city.cityPinyin[0])} Xiaolu House`,
     cityPhrase: `在${citySkill.city.city}`,
     supportedCitiesSection: '',
     defaultCity: citySkill.city.city,
@@ -44,10 +48,19 @@ function writeSkill(skillName, data) {
 function renderTemplate(text, data) {
   return text
     .replaceAll('{{skillName}}', data.skillName)
+    .replaceAll('{{displayName}}', data.displayName)
+    .replaceAll('{{displayNameEn}}', data.displayNameEn)
     .replaceAll('{{cityPhrase}}', data.cityPhrase)
     .replaceAll('{{supportedCitiesSection}}', data.supportedCitiesSection)
     .replaceAll('{{defaultCity}}', data.defaultCity)
     .replace(/\n{3,}/g, '\n\n')
+}
+
+function formatEnglishName(value) {
+  return value
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
 }
 
 function renderSupportedCitiesSection(items) {
